@@ -1,0 +1,12 @@
+#!/bin/bash
+# one domain two switch CR method by three layer - verification
+ulimit -m 13000000 -v 13000000
+spin -a one_domain_two_switch_data_test.pml
+gcc -DVECTORSZ=35000 -DCOLLAPSE -o pan_d pan.c
+./pan_d
+spin -a controller_plane_assume_I_3_guarantee_I_2_one_domain_two_switch.pml
+gcc -DVECTORSZ=35000 -DCOLLAPSE -o pan_c pan.c
+./pan_c
+spin -a manager_plane_one_domain_gurantee_I_3.pml
+gcc -DVECTORSZ=35000 -DCOLLAPSE -o pan_d pan.c
+./pan_d

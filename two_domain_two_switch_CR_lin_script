@@ -1,0 +1,22 @@
+#!/bin/bash
+# two domain two switch CR three layer - verification
+# obvious switch distributions as 1 , 1
+
+
+ulimit -m 13000000 -v 13000000
+
+spin -a two_domain_two_switch_data_test.pml
+gcc -DVECTORSZ=35000 -DCOLLAPSE -o pan_d pan.c
+./pan_d
+spin -a controller_plane_assume_I_3_guarantee_I_1_two_domain_two_switch.pml
+gcc -DVECTORSZ=35000 -DCOLLAPSE -o pan_c1 pan.c
+./pan_c1
+spin -a controller_plane_assume_I_3_guarantee_I_2_two_domain_two_switch.pml
+gcc -DVECTORSZ=35000 -DCOLLAPSE -o pan_c2 pan.c
+./pan_c2
+spin -a manager_plane_two_domain_gurantee_I_3.pml
+gcc -DVECTORSZ=35000 -DCOLLAPSE -o pan_m pan.c
+./pan_m
+
+
+

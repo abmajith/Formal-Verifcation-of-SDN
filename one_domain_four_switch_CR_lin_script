@@ -1,0 +1,25 @@
+#!/bin/bash
+# one domain four switch CR three layer - verification
+
+ulimit -m 13000000 -v 13000000
+
+
+spin -a one_domain_four_switch_data_test_top1.pml
+gcc -DVECTORSZ=35000 -DCOLLAPSE -o pan_d1 pan.c
+./pan_d1
+spin -a one_domain_four_switch_data_test_top2.pml
+gcc -DVECTORSZ=35000 -DCOLLAPSE -o pan_d2 pan.c
+./pan_d2
+spin -a one_domain_four_switch_data_test_top3.pml
+gcc -DVECTORSZ=35000 -DCOLLAPSE -o pan_d3 pan.c
+./pan_d3
+spin -a one_domain_four_switch_data_test_top4.pml
+gcc -DVECTORSZ=35000 -DCOLLAPSE -o pan_d4 pan.c
+./pan_d4
+spin -a controller_plane_assume_I_3_guarantee_I_2_one_domain_four_switch.pml
+gcc -DVECTORSZ=35000 -DCOLLAPSE -o pan_c pan.c
+./pan_c
+spin -a manager_plane_one_domain_gurantee_I_3.pml
+gcc -DVECTORSZ=35000 -DCOLLAPSE -o pan_d pan.c
+./pan_d
+

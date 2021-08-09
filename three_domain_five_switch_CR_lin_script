@@ -1,0 +1,19 @@
+#!/bin/bash
+# three domain five switch CR method - verification
+# switch distribution 1 , 1 , 3
+
+
+spin -a three_domain_five_switch_data_test_top1.pml
+gcc -DVECTORSZ=35000 -DCOLLAPSE -o pan_d1 pan.c
+./pan_d1
+spin -a three_domain_five_switch_data_test_top2.pml
+gcc -DVECTORSZ=35000 -DCOLLAPSE -o pan_d2 pan.c
+./pan_d2
+spin -a three_domain_five_switch_ctr_for1.pml
+gcc -DVECTORSZ=35000 -DCOLLAPSE -o pan_c1 pan.c
+./pan_c1
+spin -a three_domain_five_switch_ctr_for0.pml
+gcc -DVECTORSZ=35000 -DCOLLAPSE -o pan_c0 pan.c
+./pan_c0
+
+
